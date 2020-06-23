@@ -1,3 +1,4 @@
+#commit #3 to add comments for bikeshare.py
 import time
 import pandas as pd
 import numpy as np
@@ -18,15 +19,15 @@ def get_filters():
     print('Hello! Let\'s explore some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = input ("Would you like to see data for chicago, new york city or washington? ")
-    
+
     #We need a minor change here.
     #Think of a scenario where the user enters case sensitive data such as "Chicago" , "chiCAgo" etc .....
     #Think of a way to implement case agnost inputs. We need this as per the rubric.
-    city = city.lower() 
+    city = city.lower()
     #
     filt = input ("Would you like to filter the data by month, day or both? ")
-    
-    # TO DO: get user input for month (all, january, february, ... , june)     
+
+    # TO DO: get user input for month (all, january, february, ... , june)
     if filt == 'month':
        month = input ("Which month? january, february, march, april, may, june or all? ")
        month = month.lower()
@@ -37,7 +38,7 @@ def get_filters():
     elif filt == 'day':
          day = input ("Which day? monday, tuesday, wednesday, thursday,friday, saturday, sunday or all? ")
          day = day.lower()
-         print('-'*40) 
+         print('-'*40)
          return city, 'all', day
     else:
         month = input ("Which month? january, february, march, april, may, june or all? ")
@@ -46,7 +47,7 @@ def get_filters():
         day = day.lower()
         print('-'*40)
         return city, month, day
-    
+
 
 def load_data(city, month, day):
     """
@@ -101,7 +102,7 @@ def time_stats(df):
     print('Most Popular Day:', popular_day)
 
     # TO DO: display the most common start hour
-           
+
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
@@ -135,7 +136,7 @@ def station_stats(df):
     df['Station Combination'] = df['Start Station'] + ' AND ' + df['End Station']
     popular_combined_station = df['Station Combination'].mode()[0]
     print('Most Popular Combined Station:', popular_combined_station)
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -163,38 +164,38 @@ def user_stats(df):
 
     print('\nCalculating User Stats...\n')
     start_time = time.time()
-    
-   
+
+
     # TO DO: Display counts of user types
-    
+
     user_types = df['User Type'].value_counts()
     print(user_types)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
+
 def gender_birth_stats(df):
     """Displays statistics on bikeshare users' gender and birth year."""
 
     print('\nCalculating User Stats...\n')
     start_time = time.time()
     # TO DO: Display counts of gender
-    
+
     gender_types = df['Gender'].value_counts()
     print(gender_types)
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40) 
-    
+    print('-'*40)
+
     # TO DO: Display earliest, most recent, and most common year of birth
-    
+
     earliest_birth_year = int(df['Birth Year'].min())
     most_recent_birth_year = int(df['Birth Year'].max())
     most_common_birth_year = int(df['Birth Year'].mode()[0])
     print("\nEarliest birth year is %s" % earliest_birth_year)
     print("\nMost recent birth year is %s" % most_recent_birth_year)
     print("\nMost common birth year is %s" % most_common_birth_year)
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -203,25 +204,25 @@ def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
-        
+
         # a tempory dataset to show raw data
         df1 = load_data(city, month, day)
         for i in range(len(df)):
             raw_data = input('\nWould you like to see 5 lines of the raw data? Enter yes or no.\n')
             i=5*(i+1)
             if raw_data.lower() == 'yes':
-                print(df1.head()) 
+                print(df1.head())
                 df1 = df1.drop([i-5,i-4,i-3,i-2,i-1], axis = 0)
             else:
                 break
-        
+
         if city != 'washington':
            time_stats(df)
            station_stats(df)
            trip_duration_stats(df)
            user_stats(df)
            gender_birth_stats(df)
-        
+
         else:
             time_stats(df)
             station_stats(df)
