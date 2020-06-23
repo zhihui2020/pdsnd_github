@@ -5,8 +5,8 @@ Commit #1 to add created date
 Replace the Project Title
 
 ### Description
-Describe what your project is about and what it does
-
+#Describe what your project is about and what it does
+Commit #2 to add project description
 ### Files used
 Include the files used
 
